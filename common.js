@@ -60,7 +60,7 @@ function createTexture(gl, dimensions, data) {
 }
 
 function updateTexture(gl, dimensions, texture, data) {
-    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(
         gl.TEXTURE_2D,
         0, // level
