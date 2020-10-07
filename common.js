@@ -59,6 +59,20 @@ function createTexture(gl, dimensions, data) {
     return tex;
 }
 
+function updateTexture(gl, dimensions, texture, data) {
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(
+        gl.TEXTURE_2D,
+        0, // level
+        gl.RGBA32F, // internal format
+        dimensions[0], // width
+        dimensions[1], // height
+        0, // border
+        gl.RGBA, // format
+        gl.FLOAT, // type
+        data, /* source */)
+}
+
 function render(gl) {
     // draw the quad (2 triangles)
     const offset = 0;
