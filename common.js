@@ -28,7 +28,7 @@ async function getFile(url) {
             done = true;
         } else {
             for (let v of fileBody.value)
-                fileContents += String.fromCharCode.apply(v);
+                fileContents += String.fromCharCode(v);
         }
     }
     _fileCache[url] = fileContents;
