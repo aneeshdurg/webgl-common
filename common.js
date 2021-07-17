@@ -40,13 +40,14 @@ async function getFile(url) {
  * @param dimensions [width, height] tuple for texture dimensions
  * @param data - can be null, if not will be used as the source for the texture
  */
-function createTexture(gl, dimensions, data) {
+function createTexture(gl, dimensions, data, format) {
+    format = format || gl.RGBA32F;
     const tex = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, tex);
     gl.texImage2D(
         gl.TEXTURE_2D,
         0, // level
-        gl.RGBA32F, // internal format
+        format,
         dimensions[0], // width
         dimensions[1], // height
         0, // border
@@ -60,12 +61,13 @@ function createTexture(gl, dimensions, data) {
     return tex;
 }
 
-function updateTexture(gl, dimensions, texture, data) {
+function updateTexture(gl, dimensions, texture, data, format) {
+    format = format || gl.RGBA32F;
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(
         gl.TEXTURE_2D,
         0, // level
-        gl.RGBA32F, // internal format
+        format,
         dimensions[0], // width
         dimensions[1], // height
         0, // border
@@ -120,10 +122,10 @@ const bufferArrays = {
 };
 
 class FrameBufferManager {
-    constructor(gl, dimensions) {
+    constructor(gl, dimensions, format) {
         this.computeDsts = [
-            createTexture(gl, dimensions, null),
-            createTexture(gl, dimensions, null)
+            createTexture(gl, dimensions, null, format),
+            createTexture(gl, dimensions, null, format)
         ];
         this.fb = gl.createFramebuffer();
 
